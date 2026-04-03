@@ -54,6 +54,7 @@ button {
     width: 90%;
     border-radius: 15px;
     margin: 20px;
+    transition: opacity 0.5s ease-in-out;
 }
 
 audio {
@@ -110,36 +111,40 @@ let photos = [
     "photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg"
 ];
 
-function start() {
+// Start button
+function start(){
     let name = document.getElementById("nameInput").value;
 
     if(name === ""){
-        alert("Please enter name!");
+        alert("Please enter your name 😊");
         return;
     }
 
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("noteSection").classList.remove("hidden");
 
-    document.getElementById("wish").innerText =
+    document.getElementById("wish").innerText = 
         "Happy Birthday " + name + " 🎉";
 
+    // 🎉 Confetti blast
     confetti({
-        particleCount: 200,
-        spread: 120
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
     });
 }
 
+// Show memories
 function showMemories(){
     document.getElementById("noteSection").style.display = "none";
     document.getElementById("memorySection").classList.remove("hidden");
 
     startPhotoSlider();
 
-    // start music
     document.getElementById("bgMusic").play();
 }
 
+// Photo slider with smooth effect
 function startPhotoSlider(){
     let img = document.getElementById("photoSlider");
     let index = 0;
@@ -147,14 +152,21 @@ function startPhotoSlider(){
     img.src = photos[index];
 
     setInterval(function(){
-        index++;
-        if(index >= photos.length){
-            index = 0;
-        }
-        img.src = photos[index];
+        img.style.opacity = 0;
+
+        setTimeout(function(){
+            index++;
+            if(index >= photos.length){
+                index = 0;
+            }
+            img.src = photos[index];
+            img.style.opacity = 1;
+        }, 400);
+
     }, 1500);
 }
 </script>
 
 </body>
 </html>
+   
