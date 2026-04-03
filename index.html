@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise 🎉</title>
 
+<!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
@@ -45,17 +46,15 @@ button {
     box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
 }
 
-#photoSlider {
-    width: 90%;
-    border-radius: 15px;
-    margin: 20px;
-    transition: opacity 0.5s ease-in-out;
+audio {
+    margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- Start Screen -->
 <div id="startScreen">
     <h2>Enter Your Name 🎁</h2>
     <input type="text" id="nameInput" placeholder="Your Name">
@@ -63,38 +62,38 @@ button {
     <button onclick="start()">Start</button>
 </div>
 
+<!-- Note Section -->
 <div id="noteSection" class="hidden">
     <div class="card">
         <h2 id="wish"></h2>
         <p>
 Happy Birthday, Bhai ❤️🎉 <br><br>
-You’re my biggest support system and my forever protector.<br><br>
-I’m so proud of everything you’ve achieved ✨<br><br>
-May your life be full of success, happiness, and love 💙
+
+You’re not just my elder brother, you’re my biggest support system, my guide, and my forever protector.<br><br>
+
+I’m so proud of everything you’ve achieved. You truly deserve all the success and happiness ✨<br><br>
+
+May your life be filled with endless joy, success, and good health 💙<br><br>
+
+Love you always 💫
         </p>
-        <button onclick="showMemories()">Check the Memory 📸</button>
+
+        <button onclick="showFinal()">Click for Surprise 🎁</button>
     </div>
 </div>
 
-<div id="memorySection" class="hidden">
-    <h2>Memories 📸</h2>
-    <img id="photoSlider" src="">
+<!-- Final Surprise -->
+<div id="finalSection" class="hidden">
+    <h1>🎉 Happy Birthday Bhai 🎉</h1>
+    <h2>Keep Shining Always ✨</h2>
 
-    <audio id="bgMusic" loop>
+    <!-- Music -->
+    <audio id="bgMusic" loop autoplay>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
     </audio>
 </div>
 
 <script>
-// 🔥 PUT YOUR REAL IMAGE LINKS HERE
-let photos = [
-"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo1.jpg",
-"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo2.jpg",
-"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo3.jpg",
-"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo4.jpg",
-"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo5.jpg"
-];
-
 function start(){
     let name = document.getElementById("nameInput").value;
 
@@ -109,33 +108,24 @@ function start(){
     document.getElementById("wish").innerText =
         "Happy Birthday " + name + " 🎉";
 
-    confetti({ particleCount: 150, spread: 70 });
+    // Confetti
+    confetti({
+        particleCount: 150,
+        spread: 70
+    });
 }
 
-function showMemories(){
+function showFinal(){
     document.getElementById("noteSection").style.display = "none";
-    document.getElementById("memorySection").classList.remove("hidden");
+    document.getElementById("finalSection").classList.remove("hidden");
 
-    startPhotoSlider();
+    // Extra confetti blast
+    confetti({
+        particleCount: 200,
+        spread: 100
+    });
+
     document.getElementById("bgMusic").play();
-}
-
-function startPhotoSlider(){
-    let img = document.getElementById("photoSlider");
-    let index = 0;
-
-    img.src = photos[index];
-
-    setInterval(function(){
-        img.style.opacity = 0;
-
-        setTimeout(function(){
-            index = (index + 1) % photos.length;
-            img.src = photos[index];
-            img.style.opacity = 1;
-        }, 400);
-
-    }, 1500);
 }
 </script>
 
