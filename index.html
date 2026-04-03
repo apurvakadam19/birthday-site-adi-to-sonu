@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birthday Surprise 🎉</title>
 
-<!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
@@ -16,13 +15,9 @@ body {
     background: linear-gradient(to right, #ff9a9e, #fad0c4);
 }
 
-.hidden {
-    display: none;
-}
+.hidden { display: none; }
 
-#startScreen {
-    margin-top: 100px;
-}
+#startScreen { margin-top: 100px; }
 
 input {
     padding: 10px;
@@ -56,16 +51,11 @@ button {
     margin: 20px;
     transition: opacity 0.5s ease-in-out;
 }
-
-audio {
-    margin-top: 20px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- Name Input -->
 <div id="startScreen">
     <h2>Enter Your Name 🎁</h2>
     <input type="text" id="nameInput" placeholder="Your Name">
@@ -73,45 +63,38 @@ audio {
     <button onclick="start()">Start</button>
 </div>
 
-<!-- Note Section -->
 <div id="noteSection" class="hidden">
     <div class="card">
         <h2 id="wish"></h2>
         <p>
 Happy Birthday, Bhai ❤️🎉 <br><br>
-
-You’re not just my elder brother, you’re my biggest support system, my guide, and my forever protector. Thank you for always standing by me, understanding me even when I don’t say anything, and making life so much easier just by being there.<br><br>
-
-I’m so proud of everything you’ve achieved, especially this new chapter of your life. You truly deserve all the success, happiness, and love in the world. I know you’ll achieve even bigger dreams and reach your dream company one day ✨<br><br>
-
-May your life be filled with endless happiness, good health, and success. Keep shining, keep growing, and always keep smiling.<br><br>
-
-Love you so much, Bhai 💙<br>
-Forever your little sibling 💫
+You’re my biggest support system and my forever protector.<br><br>
+I’m so proud of everything you’ve achieved ✨<br><br>
+May your life be full of success, happiness, and love 💙
         </p>
-
         <button onclick="showMemories()">Check the Memory 📸</button>
     </div>
 </div>
 
-<!-- Memory Section -->
 <div id="memorySection" class="hidden">
     <h2>Memories 📸</h2>
-    <img id="photoSlider" src="photo1.jpg">
+    <img id="photoSlider" src="">
 
-    <!-- Music -->
     <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
     </audio>
 </div>
 
 <script>
+// 🔥 PUT YOUR REAL IMAGE LINKS HERE
 let photos = [
-    "photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg",
-    "photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg"
+"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo1.jpg",
+"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo2.jpg",
+"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo3.jpg",
+"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo4.jpg",
+"https://apurvakadam19.github.io/birthday-site-adi-to-sonu/photo5.jpg"
 ];
 
-// Start button
 function start(){
     let name = document.getElementById("nameInput").value;
 
@@ -123,28 +106,20 @@ function start(){
     document.getElementById("startScreen").style.display = "none";
     document.getElementById("noteSection").classList.remove("hidden");
 
-    document.getElementById("wish").innerText = 
+    document.getElementById("wish").innerText =
         "Happy Birthday " + name + " 🎉";
 
-    // 🎉 Confetti blast
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
+    confetti({ particleCount: 150, spread: 70 });
 }
 
-// Show memories
 function showMemories(){
     document.getElementById("noteSection").style.display = "none";
     document.getElementById("memorySection").classList.remove("hidden");
 
     startPhotoSlider();
-
     document.getElementById("bgMusic").play();
 }
 
-// Photo slider with smooth effect
 function startPhotoSlider(){
     let img = document.getElementById("photoSlider");
     let index = 0;
@@ -155,10 +130,7 @@ function startPhotoSlider(){
         img.style.opacity = 0;
 
         setTimeout(function(){
-            index++;
-            if(index >= photos.length){
-                index = 0;
-            }
+            index = (index + 1) % photos.length;
             img.src = photos[index];
             img.style.opacity = 1;
         }, 400);
