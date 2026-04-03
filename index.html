@@ -59,11 +59,6 @@ button {
 audio {
     margin-top: 20px;
 }
-
-/* Mobile */
-@media(max-width:600px){
-    h2 { font-size: 20px; }
-}
 </style>
 </head>
 
@@ -103,7 +98,7 @@ Forever your little sibling 💫
     <h2>Memories 📸</h2>
     <img id="photoSlider" src="photo1.jpg">
 
-    <!-- Music (Working without download) -->
+    <!-- Music -->
     <audio id="bgMusic" loop>
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
     </audio>
@@ -114,8 +109,6 @@ let photos = [
     "photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg",
     "photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg"
 ];
-
-let photoIndex = 0;
 
 function start() {
     let name = document.getElementById("nameInput").value;
@@ -143,22 +136,23 @@ function showMemories(){
 
     startPhotoSlider();
 
-    // Start music after click (browser rule)
+    // start music
     document.getElementById("bgMusic").play();
 }
 
 function startPhotoSlider(){
     let img = document.getElementById("photoSlider");
+    let index = 0;
 
-    img.src = photos[photoIndex];
+    img.src = photos[index];
 
-    setInterval(() => {
-        photoIndex++;
-        if(photoIndex >= photos.length){
-            photoIndex = 0;
+    setInterval(function(){
+        index++;
+        if(index >= photos.length){
+            index = 0;
         }
-        img.src = photos[photoIndex];
-    }, 2000);
+        img.src = photos[index];
+    }, 1500);
 }
 </script>
 
