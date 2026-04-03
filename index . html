@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise 🎉</title>
+
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+}
+
+#startScreen {
+    margin-top: 100px;
+}
+
+input {
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background: #ff4b5c;
+    color: white;
+    margin-top: 10px;
+}
+
+#mainContent {
+    display: none;
+}
+
+.card {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+}
+
+.slide {
+    display: none;
+}
+
+#photoSlider {
+    width: 90%;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+/* Mobile */
+@media(max-width:600px){
+    h1 { font-size: 22px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Name Input -->
+<div id="startScreen">
+    <h2>Enter Your Name 🎁</h2>
+    <input type="text" id="nameInput" placeholder="Your Name">
+    <br>
+    <button onclick="start()">Start</button>
+</div>
+
+<!-- Main Content -->
+<div id="mainContent">
+
+    <!-- Greeting -->
+    <div class="slide">
+        <div class="card">
+            <h1 id="wish"></h1>
+            <p>
+                Wishing you a very very happiest birthday to you brother 💙  
+                Love you so much! You are my support system ❤️  
+                You are my world 🌍 You mean a lot to me ✨🎂
+            </p>
+        </div>
+    </div>
+
+    <!-- Photo Slideshow -->
+    <div class="slide">
+        <h2>Memories 📸</h2>
+        <img id="photoSlider" src="photo1.jpg">
+    </div>
+
+    <!-- Music -->
+    <audio controls autoplay loop>
+        <source src="song.mp3" type="audio/mpeg">
+    </audio>
+
+</div>
+
+<script>
+let currentSlide = 0;
+let slides = document.getElementsByClassName("slide");
+
+let photos = [
+    "photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg","photo5.jpg",
+    "photo6.jpg","photo7.jpg","photo8.jpg","photo9.jpg","photo10.jpg"
+];
+
+let photoIndex = 0;
+
+function start() {
+    let name = document.getElementById("nameInput").value;
+
+    if(name == ""){
+        alert("Please enter name!");
+        return;
+    }
+
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+
+    document.getElementById("wish").innerText =
+        "Happy Birthday " + name + " 🎉";
+
+    showSlide();
+    startPhotoSlider();
+
+    confetti({
+        particleCount: 200,
+        spread: 100
+    });
+}
+
+function showSlide(){
+    for(let i=0; i<slides.length; i++){
+        slides[i].style.display = "none";
+    }
+
+    slides[currentSlide].style.display = "block";
+
+    currentSlide++;
+    if(currentSlide >= slides.length){
+        currentSlide = 0;
+    }
+
+    setTimeout(showSlide, 3000);
+}
+
+function startPhotoSlider(){
+    setInterval(() => {
+        let img = document.getElementById("photoSlider");
+        if(img){
+            img.src = photos[photoIndex];
+            photoIndex++;
+
+            if(photoIndex >= photos.length){
+                photoIndex = 0;
+            }
+        }
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
